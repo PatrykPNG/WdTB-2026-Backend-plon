@@ -25,3 +25,9 @@ insert into reservation (reserver_email, quantity_kg, pickup_date, picked_up) va
     ('sasiad@example.com',                  2.50, '2026-08-14', true),
     ('wrx97149@student.wroclaw.merito.pl',  5.00, '2026-09-02', true),
     ('sasiad@example.com',                  1.20, '2026-11-12', false);
+
+-- ===== LAB 02 · offer =====
+insert into offer (crop_name, quantity_kg, pickup_date, status, street, city, plot_number) values
+    ('Pomidory malinowe', 4.00, '2026-08-14', 'PICKED_UP', 'ul. Kwiatowa 12', 'Wrocław', '27'),
+    ('Cukinia',           6.50, '2026-09-02', 'RESERVED',  'ul. Ogrodowa 3',  'Wrocław', '104'),
+    ('Jabłka Szampion',  12.00, '2026-11-12', 'AVAILABLE', 'ul. Polna 8',     'Oława',   '15');
