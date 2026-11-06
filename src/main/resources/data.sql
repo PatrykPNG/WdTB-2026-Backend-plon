@@ -13,3 +13,9 @@ insert into user_account (email, display_name, role, created_at) values
 -- LAB 01: Wasze konta (zmieńcie na swoje dane, rola USER)
 -- insert into user_account (email, display_name, role, created_at) values
 --     ('imie.nazwisko@student.merito.pl', 'Imię', 'USER', current_timestamp);
+
+-- ===== LAB 02 · allotment_garden =====
+insert into allotment_garden (name, city, plot_count, founded_year) values
+    ('ROD Malwa',     'Wrocław', 180, 1975),
+    ('ROD Słonecznik', 'Wrocław', 120, 1982),
+    ('ROD Pod Dębami', 'Oława',    65, 1990);
