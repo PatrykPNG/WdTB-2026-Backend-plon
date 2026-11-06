@@ -19,3 +19,9 @@ insert into allotment_garden (name, city, plot_count, founded_year) values
     ('ROD Malwa',     'Wrocław', 180, 1975),
     ('ROD Słonecznik', 'Wrocław', 120, 1982),
     ('ROD Pod Dębami', 'Oława',    65, 1990);
+
+-- ===== LAB 02 · reservation =====
+insert into reservation (reserver_email, quantity_kg, pickup_date, picked_up) values
+    ('sasiad@example.com',                  2.50, '2026-08-14', true),
+    ('wrx97149@student.wroclaw.merito.pl',  5.00, '2026-09-02', true),
+    ('sasiad@example.com',                  1.20, '2026-11-12', false);
