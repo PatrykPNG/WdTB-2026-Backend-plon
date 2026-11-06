@@ -6,6 +6,7 @@ insert into user_account (email, display_name, role, created_at) values
     ('kuba@student.merito.pl',  'Kuba',  'USER',    current_timestamp),
     ('wrx82034@student.wroclaw.merito.pl',  'Patryk',  'USER',    current_timestamp),
     ('wrx97149@student.wroclaw.merito.pl',  'Marcin',  'USER',    current_timestamp),
+    ('sasiad@example.com',  'Sąsiad (konto testowe)',  'USER',    current_timestamp),
     ('firma@example.com',       'Firma', 'PARTNER', current_timestamp),
     ('admin@example.com',       'Admin', 'ADMIN',   current_timestamp);
 
