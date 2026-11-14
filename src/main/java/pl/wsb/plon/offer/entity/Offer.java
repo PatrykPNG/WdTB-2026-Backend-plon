@@ -5,13 +5,21 @@ import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import pl.wsb.plon.gardener.entity.Gardener;
+import pl.wsb.plon.reservation.entity.Reservation;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Oferta nadwyżki plonów wystawiona przez działkowca.
@@ -40,16 +48,26 @@ public class Offer {
     @Embedded
     private PickupAddress pickupAddress;
 
+    // LAB 03: działkowiec, który wystawił ofertę; jeden działkowiec ma wiele ofert
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "gardener_id", nullable = false)
+    private Gardener gardener;
+
+    // LAB 03: drugi koniec relacji Reservation.offer (bez nowej kolumny w bazie)
+    @OneToMany(mappedBy = "offer")
+    private List<Reservation> reservations = new ArrayList<>();
+
     protected Offer() {
     }
 
     public Offer(String cropName, BigDecimal quantityKg, LocalDate pickupDate, OfferStatus status,
-                 PickupAddress pickupAddress) {
+                 PickupAddress pickupAddress, Gardener gardener) {
         this.cropName = cropName;
         this.quantityKg = quantityKg;
         this.pickupDate = pickupDate;
         this.status = status;
         this.pickupAddress = pickupAddress;
+        this.gardener = gardener;
     }
 
     public Long getId() {
@@ -74,5 +92,13 @@ public class Offer {
 
     public PickupAddress getPickupAddress() {
         return pickupAddress;
+    }
+
+    public Gardener getGardener() {
+        return gardener;
+    }
+
+    public List<Reservation> getReservations() {
+        return reservations;
     }
 }

@@ -9,6 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import pl.wsb.plon.account.domain.UserAccount;
 import pl.wsb.plon.offer.entity.Offer;
 
 import java.math.BigDecimal;
@@ -25,9 +26,6 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "reserver_email", nullable = false, length = 120)
-    private String reserverEmail;
-
     @Column(name = "quantity_kg", nullable = false, precision = 6, scale = 2)
     private BigDecimal quantityKg;
 
@@ -41,23 +39,25 @@ public class Reservation {
     @JoinColumn(name = "offer_id", nullable = false)
     private Offer offer;
 
+    // LAB 03: konto osoby, która rezerwuje odbiór; jedno konto może mieć wiele rezerwacji
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_account_id", nullable = false)
+    private UserAccount reserver;
+
     protected Reservation() {
     }
 
-    public Reservation(String reserverEmail, BigDecimal quantityKg, LocalDate pickupDate, Boolean pickedUp, Offer offer) {
-        this.reserverEmail = reserverEmail;
+    public Reservation(BigDecimal quantityKg, LocalDate pickupDate, Boolean pickedUp, Offer offer,
+                       UserAccount reserver) {
         this.quantityKg = quantityKg;
         this.pickupDate = pickupDate;
         this.pickedUp = pickedUp;
         this.offer = offer;
+        this.reserver = reserver;
     }
 
     public Long getId() {
         return id;
-    }
-
-    public String getReserverEmail() {
-        return reserverEmail;
     }
 
     public BigDecimal getQuantityKg() {
@@ -74,5 +74,9 @@ public class Reservation {
 
     public Offer getOffer() {
         return offer;
+    }
+
+    public UserAccount getReserver() {
+        return reserver;
     }
 }
