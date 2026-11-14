@@ -2,10 +2,14 @@ package pl.wsb.plon.reservation.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import pl.wsb.plon.offer.entity.Offer;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -33,14 +37,19 @@ public class Reservation {
     @Column(name = "picked_up")
     private Boolean pickedUp;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "offer_id", nullable = false)
+    private Offer offer;
+
     protected Reservation() {
     }
 
-    public Reservation(String reserverEmail, BigDecimal quantityKg, LocalDate pickupDate, Boolean pickedUp) {
+    public Reservation(String reserverEmail, BigDecimal quantityKg, LocalDate pickupDate, Boolean pickedUp, Offer offer) {
         this.reserverEmail = reserverEmail;
         this.quantityKg = quantityKg;
         this.pickupDate = pickupDate;
         this.pickedUp = pickedUp;
+        this.offer = offer;
     }
 
     public Long getId() {
@@ -61,5 +70,9 @@ public class Reservation {
 
     public Boolean getPickedUp() {
         return pickedUp;
+    }
+
+    public Offer getOffer() {
+        return offer;
     }
 }
